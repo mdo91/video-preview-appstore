@@ -1,0 +1,9 @@
+# Do not gitignore Binaries/ffmpeg or Binaries/ffprobe here: with Xcode’s file-system
+# synchronized groups, ignored files are omitted from the built .app, so the app
+# cannot find them at runtime. Keep large binaries out of git with selective
+# commits, Git LFS, or local-only clones instead.
+
+# Local source/build trees (not used by Xcode copy phase; would blow up the repo)
+FFmpeg/
+x264/
+/ffprobe

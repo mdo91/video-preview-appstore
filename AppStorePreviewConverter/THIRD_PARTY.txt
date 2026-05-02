@@ -1,0 +1,3 @@
+This application may bundle FFmpeg (https://ffmpeg.org), which is licensed under the GNU Lesser General Public License (LGPL) version 2.1 or later, and may include optional GPL-licensed components depending on the build you ship.
+
+If you distribute FFmpeg binaries with this app, you must comply with the license for that build (including notices, source or written offer, and trademark policy). See the FFmpeg project documentation for details.

@@ -1,0 +1,41 @@
+AppStorePreviewConverter — build and DMG export notes
+========================================================
+
+ENABLE_USER_SCRIPT_SANDBOXING (Xcode → Project → Build Settings)
+-----------------------------------------------------------------
+This project sets ENABLE_USER_SCRIPT_SANDBOXING = NO at the project level.
+
+Reason: the “Copy FFmpeg binaries” Run Script phase copies
+  $(SRCROOT)/AppStorePreviewConverter/Binaries/ffmpeg
+  $(SRCROOT)/AppStorePreviewConverter/Binaries/ffprobe
+into the built .app. With script sandboxing ON, macOS can deny cp(1)
+file-read-data on those paths unless every read path is declared in the
+script phase’s Input Files (and directory-only inputs are unreliable).
+
+If you later set ENABLE_USER_SCRIPT_SANDBOXING back to YES:
+  • List every path the script reads in “Input File Paths” (or an input
+    file list), including both binaries (and any other files touched).
+  • Keep matching “Output File Paths” for each file written.
+  • Or remove the Run Script and rely only on Xcode’s resource copy if
+    you no longer need a separate copy step.
+
+DMG / Archive export
+--------------------
+Archive and export a DMG as usual in Xcode Organizer. The setting above
+affects whether Run Script build phases can read the source tree during
+*compile*; it is not the same as the app’s App Sandbox at runtime.
+
+Bundled ffmpeg/ffprobe: see AppStorePreviewConverter/Binaries/README.txt
+and AppStorePreviewConverter/THIRD_PARTY.txt for licensing and layout.
+
+App Sandbox — writing next to a user-chosen file (e.g. Desktop)
+-------------------------------------------------------------
+Apple documents that URLs from Open/Save panels (and drag‑drop) carry
+security‑scoped access; creating *new* files in the same folder as a
+dropped file is *not* reliably allowed (especially Desktop / Documents).
+
+Best practice used here: encode to the app container temp directory, then
+present NSSavePanel so the user confirms the destination URL (same flow
+as Finder “Export”). Optional long‑term approach: security‑scoped
+bookmarks for a *folder* the user picks once (see “Accessing files from
+the macOS App Sandbox” on developer.apple.com).
