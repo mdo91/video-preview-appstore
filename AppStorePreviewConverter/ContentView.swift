@@ -7,8 +7,14 @@ import SwiftUI
 import UniformTypeIdentifiers
 import Foundation
 
+private struct QueueItem: Identifiable, Hashable {
+    let id: UUID
+    let url: URL
+}
+
 struct ContentView: View {
-    @State private var queue: [URL] = []
+    @State private var queue: [QueueItem] = []
+    @State private var selection: UUID?
     @State private var orientation: Orientation = .portrait
     @State private var logText = ""
     @State private var isConverting = false
@@ -43,25 +49,34 @@ struct ContentView: View {
 
                 Spacer()
 
-                Button("Convert queue") {
+                Button(action: {
                     Task { await runQueue() }
+                }) {
+                    HStack(spacing: 8) {
+                        if isConverting {
+                            ProgressView()
+                                .controlSize(.small)
+                        }
+                        Text(isConverting ? "Converting..." : "Convert queue")
+                    }
                 }
                 .keyboardShortcut(.return, modifiers: .command)
                 .disabled(queue.isEmpty || isConverting)
             }
 
-            List {
-                ForEach(queue, id: \.self) { url in
+            List(selection: $selection) {
+                ForEach(queue) { item in
                     HStack {
-                        Text(url.lastPathComponent)
+                        Text(item.url.lastPathComponent)
                             .lineLimit(1)
                         Spacer()
                         Button(role: .destructive) {
-                            queue.removeAll { $0 == url }
+                            removeQueueItem(id: item.id)
                         }
                         .buttonStyle(.borderless)
                         .disabled(isConverting)
                     }
+                    .tag(item.id)
                 }
             }
             .frame(minHeight: 120)
@@ -100,7 +115,7 @@ struct ContentView: View {
         ) { result in
             switch result {
             case .success(let urls):
-                queue.append(contentsOf: urls)
+                addToQueue(urls)
             case .failure(let err):
                 lastError = err.localizedDescription
             }
@@ -136,7 +151,24 @@ struct ContentView: View {
             }
         }
         await MainActor.run {
-            queue.append(contentsOf: urls)
+            addToQueue(urls)
+        }
+    }
+
+    private func addToQueue(_ urls: [URL]) {
+        guard !urls.isEmpty else { return }
+        let newItems = urls.map { QueueItem(id: UUID(), url: $0) }
+        queue.append(contentsOf: newItems)
+        selection = newItems.last?.id
+    }
+
+    private func removeQueueItem(id: UUID) {
+        let isSelected = (selection == id)
+        queue.removeAll { $0.id == id }
+        if queue.isEmpty {
+            selection = nil
+        } else if isSelected {
+            selection = queue.first?.id
         }
     }
 
@@ -151,8 +183,16 @@ struct ContentView: View {
             return
         }
 
-        let urls = queue
-        for url in urls {
+        let itemsToConvert: [QueueItem]
+        if let selected = selection, let idx = queue.firstIndex(where: { $0.id == selected }) {
+            itemsToConvert = Array(queue[idx...])
+        } else {
+            itemsToConvert = queue
+        }
+
+        for item in itemsToConvert {
+            selection = item.id
+            let url = item.url
             logText += "\n—— \(url.lastPathComponent) ——\n"
             do {
                 let output = try await ConversionService.convert(input: url, orientation: orientation.rawValue)
