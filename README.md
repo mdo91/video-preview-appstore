@@ -41,6 +41,29 @@ Apple’s rules and Connect behavior can change; this project encodes to the pub
 
 ---
 
+## Redistribution, FFmpeg, and GPL
+
+This project **bundles** `ffmpeg` and `ffprobe` under `AppStorePreviewConverter/Binaries/`.
+
+The bundled executables checked in tree are configured with **`--enable-gpl`** and **`--enable-libx264`**, and are built **`--disable-shared` (static)**. Under FFmpeg’s own licensing rules, that makes the shipped binaries **GPL-class**, **not LGPL-only**.
+
+Implications (informational, not legal advice):
+
+- If you **publish this repo** or **ship a built `.app`** that includes these binaries, you must satisfy **GPL** (and related) obligations for those parts—see **[`AppStorePreviewConverter/THIRD_PARTY.txt`](AppStorePreviewConverter/THIRD_PARTY.txt)** and upstream [FFmpeg legal](https://www.ffmpeg.org/legal.html) / [LICENSE.md](https://github.com/FFmpeg/FFmpeg/blob/master/LICENSE.md).
+- A **closed-source commercial** product that embeds this exact FFmpeg build is **high risk** unless you have a deliberate compliance strategy approved by counsel; the straightforward open-source path is to keep **application source** under a **GPL-compatible** license and include complete licensing notices and source-offer practice for FFmpeg/libx264.
+- **Patent** licensing for formats such as H.264 is a **separate** topic from GPL/LGPL copyright terms.
+
+**Verify your build** at any time:
+
+```bash
+./AppStorePreviewConverter/Binaries/ffmpeg -version
+./AppStorePreviewConverter/Binaries/ffprobe -version
+```
+
+This repository does not yet include a root `LICENSE` file for the Swift/UI code; add one that matches how you intend to distribute the combined work (often GPL-compatible if you keep shipping these binaries).
+
+---
+
 ## Building
 
 1. Open **`AppStorePreviewConverter.xcodeproj`** in Xcode.
@@ -79,4 +102,5 @@ Optional **`OUTPUT_FILE`** — absolute path for the encoded MP4 (used by the ap
 
 ## License
 
-Application source: your repository license (if any). **FFmpeg** is LGPL/GPL components—see **`AppStorePreviewConverter/THIRD_PARTY.txt`** and comply when redistributing binaries.
+- **Bundled `ffmpeg` / `ffprobe`:** **GPL-class** build (see [`AppStorePreviewConverter/THIRD_PARTY.txt`](AppStorePreviewConverter/THIRD_PARTY.txt) and the `configuration:` line from `ffmpeg -version`). Comply with GPL and libx264 terms when you redistribute those binaries.
+- **Application source (Swift, script, project files):** add a root **`LICENSE`** file consistent with your distribution model; if you continue to ship the bundled GPL-enabled FFmpeg, a **GPL-compatible** license for your own code is the usual match—confirm with qualified counsel for your situation.
