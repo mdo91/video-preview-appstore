@@ -41,6 +41,17 @@ Apple’s rules and Connect behavior can change; this project encodes to the pub
 
 ---
 
+## Downloads (v1.0.0)
+
+Prebuilt **notarized** macOS artifacts are also committed under `releases/v1.0.0/` for convenience (direct download links):
+
+- **DMG (drag to Applications):** [download DMG](https://github.com/mdo91/video-preview-appstore/raw/refs/heads/main/releases/v1.0.0/AppStorePreviewConverter-macOS.dmg)
+- **ZIP (signed `.app` bundle):** [download ZIP](https://github.com/mdo91/video-preview-appstore/raw/refs/heads/main/releases/v1.0.0/AppStorePreviewConverter-macOS.zip)
+
+Note: committing large binaries grows Git history and slows clones; GitHub **Releases** are usually the better long-term distribution mechanism.
+
+---
+
 ## Redistribution, FFmpeg, and GPL
 
 This project **bundles** `ffmpeg` and `ffprobe` under `AppStorePreviewConverter/Binaries/`.
@@ -90,7 +101,7 @@ Optional **`OUTPUT_FILE`** — absolute path for the encoded MP4 (used by the ap
 ## Future considerations
 
 - **More preview sizes** — Add presets (resolution + aspect) for other iPhone/iPad slots Connect lists, possibly driven by a picker instead of only portrait/landscape 6.5".
-- **Smaller repo / clones** — Move large binaries to **Git LFS** or a documented download step so the Git history stays light; keep runtime layout unchanged.
+- **Smaller repo / clones** — Prefer **GitHub Releases** (or **Git LFS**) for big DMG/ZIP artifacts; this repo currently includes `v1.0.0` binaries under `releases/` for convenience, but future versions may move artifacts out of Git history.
 - **Xcode Run Script** — Re-enable **`ENABLE_USER_SCRIPT_SANDBOXING`** with explicit input/output paths if your org requires it (see `BUILD-NOTES.txt`).
 - **Output folder access** — Optional **security-scoped bookmark** to a user-chosen folder to skip repeated Save panels for batch exports.
 - **UX** — Per-file progress, cancel in-flight encode, remember last orientation and destination.
