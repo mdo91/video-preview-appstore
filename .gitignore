@@ -7,3 +7,6 @@
 FFmpeg/
 x264/
 /ffprobe
+
+# Xcode / local packaging output (not for Git)
+build/
