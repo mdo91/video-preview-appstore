@@ -7,7 +7,7 @@ The Xcode target folder AppStorePreviewConverter/ is synchronized into the app b
 
 For distribution to other Macs, prefer static builds (no Homebrew Cellar paths). Homebrew’s ffmpeg is dynamically linked to /opt/homebrew/Cellar/ffmpeg/... — it runs on your machine while Homebrew is installed, but can fail on machines without those libraries.
 
-See THIRD_PARTY.txt in this target for FFmpeg license obligations. The binaries
+See THIRD_PARTY.md in this target for FFmpeg license obligations. The binaries
 checked in with this project are a static, --enable-gpl + libx264 build (GPL-class,
 not LGPL-only); run `./Binaries/ffmpeg -version` after replacing them to confirm.
 

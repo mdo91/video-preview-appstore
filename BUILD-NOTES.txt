@@ -26,7 +26,7 @@ affects whether Run Script build phases can read the source tree during
 *compile*; it is not the same as the app’s App Sandbox at runtime.
 
 Bundled ffmpeg/ffprobe: see AppStorePreviewConverter/Binaries/README.txt
-and AppStorePreviewConverter/THIRD_PARTY.txt for licensing and layout.
+and AppStorePreviewConverter/THIRD_PARTY.md for licensing and layout.
 
 App Sandbox — writing next to a user-chosen file (e.g. Desktop)
 -------------------------------------------------------------

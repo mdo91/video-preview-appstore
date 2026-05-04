@@ -17,7 +17,7 @@ The heavy lifting is done by **`appstore_convert.sh`** (bundled `ffmpeg` / `ffpr
   - **Container** — MP4 with **`faststart`** for streaming-friendly layout.
 - **Two-pass x264** — Pass logs written under **`$TMPDIR`** so encoding works under the App Sandbox.
 - **Sandbox-friendly export** — Encode to a temp file, then **`NSSavePanel`** so the user picks a destination (needed for reliable writes outside the container, e.g. Desktop).
-- **Bundled tools** — Ships **`ffmpeg`** and **`ffprobe`** from `AppStorePreviewConverter/Binaries/` (see `Binaries/README.txt` and `THIRD_PARTY.txt`).
+- **Bundled tools** — Ships **`ffmpeg`** and **`ffprobe`** from `AppStorePreviewConverter/Binaries/` (see `Binaries/README.txt` and `THIRD_PARTY.md`).
 
 ---
 
@@ -60,7 +60,7 @@ The bundled executables checked in tree are configured with **`--enable-gpl`** a
 
 Implications (informational, not legal advice):
 
-- If you **publish this repo** or **ship a built `.app`** that includes these binaries, you must satisfy **GPL** (and related) obligations for those parts—see **[`AppStorePreviewConverter/THIRD_PARTY.txt`](AppStorePreviewConverter/THIRD_PARTY.txt)** and upstream [FFmpeg legal](https://www.ffmpeg.org/legal.html) / [LICENSE.md](https://github.com/FFmpeg/FFmpeg/blob/master/LICENSE.md).
+- If you **publish this repo** or **ship a built `.app`** that includes these binaries, you must satisfy **GPL** (and related) obligations for those parts—see **[`AppStorePreviewConverter/THIRD_PARTY.md`](AppStorePreviewConverter/THIRD_PARTY.md)** and upstream [FFmpeg legal](https://www.ffmpeg.org/legal.html) / [LICENSE.md](https://github.com/FFmpeg/FFmpeg/blob/master/LICENSE.md).
 - A **closed-source commercial** product that embeds this exact FFmpeg build is **high risk** unless you have a deliberate compliance strategy approved by counsel; the straightforward open-source path is to keep **application source** under a **GPL-compatible** license and include complete licensing notices and source-offer practice for FFmpeg/libx264.
 - **Patent** licensing for formats such as H.264 is a **separate** topic from GPL/LGPL copyright terms.
 
@@ -113,5 +113,5 @@ Optional **`OUTPUT_FILE`** — absolute path for the encoded MP4 (used by the ap
 
 ## License
 
-- **Bundled `ffmpeg` / `ffprobe`:** **GPL-class** build (see [`AppStorePreviewConverter/THIRD_PARTY.txt`](AppStorePreviewConverter/THIRD_PARTY.txt) and the `configuration:` line from `ffmpeg -version`). Comply with GPL and libx264 terms when you redistribute those binaries.
+- **Bundled `ffmpeg` / `ffprobe`:** **GPL-class** build (see [`AppStorePreviewConverter/THIRD_PARTY.md`](AppStorePreviewConverter/THIRD_PARTY.md) and the `configuration:` line from `ffmpeg -version`). Comply with GPL and libx264 terms when you redistribute those binaries.
 - **Application source (Swift, script, project files):** add a root **`LICENSE`** file consistent with your distribution model; if you continue to ship the bundled GPL-enabled FFmpeg, a **GPL-compatible** license for your own code is the usual match—confirm with qualified counsel for your situation.
