@@ -113,6 +113,15 @@ Optional **`OUTPUT_FILE`** — absolute path for the encoded MP4 (used by the ap
 
 ---
 
+## Community guidelines
+
+- Code of Conduct: [`.github/CODE_OF_CONDUCT.md`](.github/CODE_OF_CONDUCT.md)
+- Contributing: [`.github/CONTRIBUTING.md`](.github/CONTRIBUTING.md)
+- Security reporting: [`.github/SECURITY.md`](.github/SECURITY.md)
+- Support: [`.github/SUPPORT.md`](.github/SUPPORT.md)
+
+---
+
 ## License
 
 - **Bundled `ffmpeg` / `ffprobe`:** **GPL-class** build (see [`AppStorePreviewConverter/THIRD_PARTY.md`](AppStorePreviewConverter/THIRD_PARTY.md) and the `configuration:` line from `ffmpeg -version`). Comply with GPL and libx264 terms when you redistribute those binaries.
