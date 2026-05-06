@@ -4,8 +4,9 @@ Thanks for your interest in contributing.
 
 ## Before you start
 
-- Search existing issues to avoid duplicates.
-- For larger changes, open an issue first to align on approach.
+- Search existing **Issues** *and* **Discussions** to avoid duplicates.
+- For usage questions (“how should I encode…”, “why did Connect reject…”), prefer **[GitHub Discussions](https://github.com/mdo91/video-preview-appstore/discussions)**.
+- For larger changes, open an issue first to align on approach (unless it's strictly a Discussion-level question).
 - Keep pull requests focused and small when possible.
 
 ## Development setup

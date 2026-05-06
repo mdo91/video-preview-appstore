@@ -115,10 +115,11 @@ Optional **`OUTPUT_FILE`** — absolute path for the encoded MP4 (used by the ap
 
 ## Community guidelines
 
+- Questions & community chat: **[GitHub Discussions](https://github.com/mdo91/video-preview-appstore/discussions)** (see [`.github/DISCUSSIONS_WELCOME.md`](.github/DISCUSSIONS_WELCOME.md) for posting guidance)
 - Code of Conduct: [`.github/CODE_OF_CONDUCT.md`](.github/CODE_OF_CONDUCT.md)
 - Contributing: [`.github/CONTRIBUTING.md`](.github/CONTRIBUTING.md)
 - Security reporting: [`.github/SECURITY.md`](.github/SECURITY.md)
-- Support: [`.github/SUPPORT.md`](.github/SUPPORT.md)
+- Support (where to ask): [`.github/SUPPORT.md`](.github/SUPPORT.md)
 
 ---
 
