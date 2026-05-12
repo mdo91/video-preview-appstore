@@ -4,6 +4,8 @@ macOS SwiftUI utility that turns screen recordings (typically **QuickTime `.mov`
 
 The heavy lifting is done by **`appstore_convert.sh`** (bundled `ffmpeg` / `ffprobe`); the app provides a small queue UI, sandbox-safe export, and bundled encoders.
 
+**Real-world check:** App Store preview media prepared with this tool has shipped on a live listing — see [**DailyTaskr** on the App Store](https://apps.apple.com/de/app/dailytaskr/id6751054391?l=en-GB).
+
 ![App Store Preview Converter main window](demo.png)
 
 ---
